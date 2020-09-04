@@ -10,68 +10,56 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR HAI GUYS!!!',
-          textAlign: TextAlign.center,),
-
+        title: Text(
+          'BMI CALCULATOR ',
+        ),
       ),
       body: Column(
-        children:<Widget>[
-          Expanded(child:Row(
-            children:<Widget>[
-              Expanded(child:Container(
-                margin: EdgeInsets.all(15.0),
-                decoration:BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Color(0xFF1D1E33),
-                  ),
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ReusableCard(colour : Color(0xFF1D1E37)),
+                ),
+                Expanded(
+                  child: ReusableCard(colour : Color(0xFF1D1E33)),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ReusableCard(colour : Color(0xFF1D1E30)),
+          ),
+          Expanded(
+            child: Row(children: <Widget>[
+              Expanded(
+                child: ReusableCard(
+                    colour: Color(0xFF1D1E31),
                 ),
               ),
-              Expanded(child:Container(
-                margin: EdgeInsets.all(15.0),
-                decoration:BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Color(0xFF1D1E33),
-                  ),
-                ),
+              Expanded(
+                child: ReusableCard(colour : Color(0xFF1D1E38)),
               ),
-          ],
+            ]),
           ),
-          ),
+        ],
+      ),
+    );
+  }
+}
 
+class ReusableCard extends StatelessWidget {
+   ReusableCard({@required this.colour});
+  final Color colour ;
 
-    Expanded(child:Container(
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       margin: EdgeInsets.all(15.0),
-      decoration:BoxDecoration(
-      borderRadius: BorderRadius.circular(10.0),
-      color: Color(0xFF1D1E33),
-
-    ),
-    ),
-    ),
-          Expanded(child:Row(
-    children:<Widget>[
-    Expanded(child:Container(
-    margin: EdgeInsets.all(15.0),
-    decoration:BoxDecoration(
-    borderRadius: BorderRadius.circular(10.0),
-    color: Color(0xFF1D1E33),
-
-    ),
-    ),
-    ),
-    Expanded(child:Container(
-    margin: EdgeInsets.all(15.0),
-    decoration:BoxDecoration(
-    borderRadius: BorderRadius.circular(10.0),
-    color: Color(0xFF1D1E33),
-
-    ),
-    ),
-    ),
-    ]
-    ),
-    ),
-    ],
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: colour,
       ),
     );
   }
