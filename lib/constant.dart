@@ -12,3 +12,23 @@ const klabelnumberStyle=TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w900,
 );
+const kLargeButtonTextStyle= TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+);
+const kTitleStyle= TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 50,
+);
+const kResultTextStyle=TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+);
+const kbmiTextStyle= TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 100,
+);
+const kbmiBodyTextStyle= TextStyle(
+    fontSize: 20,
+);

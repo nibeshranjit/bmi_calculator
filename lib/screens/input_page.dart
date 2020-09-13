@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_widget.dart';
-import 'reusable_widget.dart';
-import 'constant.dart';
+import '../components/icon_widget.dart';
+import '../components/reusable_widget.dart';
+import '../constant.dart';
+import 'result_page.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
+import 'package:bmi_calculator/bmi_calculator_brain.dart';
 
 enum Gender {
   male,
@@ -21,7 +25,7 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
   int weight = 40;
-  int age=10;
+  int age = 10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,7 +144,7 @@ class _InputPageState extends State<InputPage> {
                           children: <Widget>[
                             RoundIconButton(
                               icon: FontAwesomeIcons.plus,
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
                                   weight++;
                                 });
@@ -151,7 +155,7 @@ class _InputPageState extends State<InputPage> {
                             ),
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
                                   weight--;
                                 });
@@ -167,70 +171,65 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     colour: kactiveCardColour,
-                    cardChild:Column(
+                    cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('AGE', style:klabeltextStyle,),
-                          Text(age.toString(), style:klabelnumberStyle,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: (){
-                                  setState(() {
-                                    age++;
-                                  });
-                                },
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: (){
-                                  setState(() {
-                                    age--;
-                                  });
-                                },
-                              ),
-                            ],
-                          )
-                        ],
+                      children: <Widget>[
+                        Text(
+                          'AGE',
+                          style: klabeltextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: klabelnumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            color: kbottomColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kbottomContainerHeight,
-          ),
+          BottomButton(
+              buttonTitle: 'CALCULATE',
+              onTap: () {
+                BmiBrain calc = BmiBrain(height: height, weight: weight);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return ResultsPage(
+                      bmiResult: calc.calculateBMI(),
+                      resultText: calc.getResult(),
+                      interpretation: calc.getInterpretation(),
+                    );
+                  }),
+                );
+              }),
         ],
       ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({@required this.icon, @required this.onPressed});
-  final IconData icon;
-  final Function onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      onPressed: onPressed,
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-      constraints: BoxConstraints.tightFor(
-        width: 56,
-        height: 56,
-      ),
-      elevation: 10.0,
     );
   }
 }
